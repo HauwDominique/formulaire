@@ -1,0 +1,23 @@
+input{
+    margin : 10px;
+}
+
+button{
+    margin:5px;
+}
+
+ul{
+    border:solid black 1px;
+    padding: 5px;
+    width : 400px;
+    margin : 0px auto;
+    list-style: none;
+}
+
+li{
+    border-bottom: solid grey 1px;
+    background-color: grey;
+    color : white;
+    font-weight: bold;
+    margin : 2px;
+}

@@ -5,17 +5,10 @@ function Formulaire(props) {
 
     let [name, setName] = useState('');
     let [id, setId] = useState(0);
-    let [list, setList] = useState([
-      ]);
+    let [list, setList] = useState([]);
     let [endTask, setendTask] = useState([]);
 
-    function moveItem(id){
-       // event.preventDefault();
-        endTask.push({"id":tache.id, "name":tache.name)};
-        setId(id + 1);
-        setName('');
-        deleteItem();
-    }
+    console.log(list);
 
 
     function handleChange(event){
@@ -30,19 +23,21 @@ function Formulaire(props) {
     }
 
     function deleteList(){
-      // console.log('hello');
         setList([]);
-        setName('');
     }
 
     function deleteItem(id){
-        console.log(id);
-        setList(list.filter(Tache => Tache.id !=id));
-        list.splice(id,1)
+        setList(list.filter(Tache => Tache.id !==id));
     }
 
+    // console.log(list);
 
-    console.log(list);
+    function moveItem(id){
+        let array= list.filter(Tache=>Tache.id === id);
+        array.map((objet)=>endTask.push(objet));
+        setList(list.filter(Tache => Tache.id !==id));
+     }
+ 
 
    return (
        <div className="">
@@ -61,17 +56,18 @@ function Formulaire(props) {
            
             <ul className="">
                 {list.map((tache)=> 
-                <li key={tache.id}> {tache.name}
-                    <button type="button" className="btn btn-danger" onClick={()=>deleteItem(tache.id)}>X</button>
-                    <button type="button" className="btn btn-primary" onClick={(()=>moveItem(tache.id))}>Move</button>
-
+                    <li key={tache.id}> {tache.id} - {tache.name}
+                        <button type="button" className="btn btn-danger" onClick={()=>deleteItem(tache.id)}>X</button>
+                        <button type="button" className="btn btn-primary" onClick={(()=>moveItem(tache.id))}>Move</button>
                 </li>)}
             </ul>
 
             <p>Tâche effectuée :</p>
-           
-           <ul className="">
-           </ul>
+                       
+            <ul className="">
+                {endTask.map((task)=>
+                    <li key={task.id}> {task.id} - {task.name} </li>)}
+                </ul>
 
 
        </div>

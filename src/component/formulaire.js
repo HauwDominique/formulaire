@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import '../css/formulaire.css';
 
-
-
 function Formulaire(props) {
 
     let [name, setName] = useState('');
     let [id, setId] = useState(0);
-    let [idFinishedTask, setIdFinishedTask] = useState(0);
     let [list, setList] = useState([]);
     let [endTask, setEndTask] = useState([]);
+    let [isExistTask, setExistTask] = useState(false);
+    let [isExistFinishedTask, setExistFinishedTask] = useState(false);
 
     function handleChange(event){
         setName(event.target.value)
@@ -20,10 +19,7 @@ function Formulaire(props) {
         list.push({"id": id, "name": name});
         setId(id + 1);
         setName('');
-    }
-
-    function deleteTasksList(){
-        setList([]);
+        setExistTask(true);
     }
 
     function deleteTask(id){
@@ -32,10 +28,16 @@ function Formulaire(props) {
         list.splice(id,1)
     }
 
+    function deleteTasksList(){
+        setList([]);
+        setExistTask(false);
+    }
+
     function sendToFinishedTasks(id){
         let array= list.filter(Task=>Task.id === id);
         array.map((objet)=>endTask.push(objet));
         setList(list.filter(Task => Task.id !==id));
+        setExistFinishedTask(true);
      }
 
      function deletedFinishedTask(endTaskid){
@@ -45,6 +47,7 @@ function Formulaire(props) {
 
      function deleteFinishedTaskList(){
         setEndTask([]);
+        setExistFinishedTask(false);
      }
 
 
@@ -73,8 +76,10 @@ function Formulaire(props) {
                     </button>
 
                 </li>)}
+                    
+                {isExistTask ? <button type="button" className="btn btn-warning" onClick={deleteTasksList}>Vider la liste</button> : "" }
 
-                <button type="button" className="btn btn-warning" onClick={deleteTasksList}>Vider la liste</button>
+                }
             </ul>
         </div>
 
@@ -93,7 +98,10 @@ function Formulaire(props) {
                </li>)}
            </ul>
 
-           <button className="btn btn-warning" onClick={()=>deleteFinishedTaskList()}>Vider la liste</button>
+           {/* <button className="btn btn-warning" onClick={()=>deleteFinishedTaskList()}>Vider la liste</button> */}
+
+           {isExistFinishedTask ? <button type="button" className="btn btn-warning" onClick={deleteFinishedTaskList}>Vider la liste</button> : "" }
+
         </div>
 
 

@@ -30,7 +30,7 @@ p{
     background-color:lightgreen;
     font-weight: bold;
     padding:5px;
-    border-bottom: solid grey 1px;
+    border-bottom: solid white 1px;
 }
 
 .container{
@@ -40,7 +40,6 @@ p{
 
 .bg-grey{
     background-color: lightslategray;
-
 }
 
 .bg-green{
@@ -52,6 +51,6 @@ p{
 }
 
 .finishedTasks{
-    border-bottom:solid 1px white;
+    border-bottom:solid 1px lightgreen;
     color:white;
 }
